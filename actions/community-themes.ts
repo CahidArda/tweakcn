@@ -36,10 +36,10 @@ import type {
 } from "@/types/community";
 import { unstable_cache, revalidateTag } from "next/cache";
 import { Ratelimit } from "@upstash/ratelimit";
-import { kv } from "@vercel/kv";
+import { Redis } from "@upstash/redis";
 
 const ratelimit = new Ratelimit({
-  redis: kv,
+  redis: Redis.fromEnv(),
   limiter: Ratelimit.fixedWindow(5, "3600s"),
 });
 
